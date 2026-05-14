@@ -86,6 +86,22 @@ Shortcut: `make dev-integrated` starts **control-db** + **redis** and prints the
 - **Python package:** `postgresops`  
 - **CLI (future):** `pgopsctl`  
 
+## Source code on GitHub
+
+Suggested **public** repository name under [infrayantra](https://github.com/infrayantra): **`postgresops-control-plane`** (matches Docker Hub image `infrayantra/postgresops-control-plane`).
+
+1. On GitHub: **New repository** → Owner **infrayantra** → Name **`postgresops-control-plane`** → **Public** → create **without** README / `.gitignore` / license (this tree already has them).
+2. From the **workspace root** (parent of `postgresops-enterprise/`), with Git already initialized:
+
+```bash
+git remote add origin https://github.com/infrayantra/postgresops-control-plane.git
+git push -u origin main
+```
+
+Use SSH instead if you prefer: `git@github.com:infrayantra/postgresops-control-plane.git`.
+
+You need a valid GitHub login on that machine (**HTTPS + PAT** or **SSH key** added to your GitHub account). Do not share tokens or passwords in chat.
+
 ## License
 
 Proprietary / assign as needed by your organization.
