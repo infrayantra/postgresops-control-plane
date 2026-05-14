@@ -1,0 +1,61 @@
+services:
+  control-db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgresops
+    ports:
+      - "55432:5432"
+    volumes:
+      - control_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgresops"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "56379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Unified app: nginx (UI + /docs + /metrics) proxies /api to uvicorn on loopback.
+  control-plane:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.unified
+    init: true
+    environment:
+      POSTGRESOPS_DATABASE_URL: postgresql+asyncpg://postgres:postgres@control-db:5432/postgresops
+      POSTGRESOPS_REDIS_URL: redis://redis:6379/0
+      POSTGRESOPS_ENV: development
+      POSTGRESOPS_BUILD_ID: compose
+      POSTGRESOPS_CORS_ORIGINS: http://localhost:8080
+    ports:
+      - "8080:80"
+    depends_on:
+      control-db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/opt/venv/bin/python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1/api/v1/health/live', timeout=4)",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
+
+volumes:
+  control_pg_data:

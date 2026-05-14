@@ -1,0 +1,14 @@
+{
+  "name": "postgresops-control-plane",
+  "private": true,
+  "version": "0.1.0",
+  "description": "PostgresOps Control Plane — integrated API + web UI local dev",
+  "scripts": {
+    "dev": "concurrently -k -n api,ui -c blue,magenta \"npm run dev:api\" \"npm run dev:ui\"",
+    "dev:api": "cd backend && uvicorn postgresops.main:app --reload --host 127.0.0.1 --port 8000",
+    "dev:ui": "cd frontend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

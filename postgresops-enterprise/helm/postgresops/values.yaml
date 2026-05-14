@@ -1,0 +1,24 @@
+replicaCount: 1
+
+image:
+  repository: postgresops/api
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+env:
+  POSTGRESOPS_ENV: production
+  POSTGRESOPS_DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgresops-catalog:5432/postgresops
+  POSTGRESOPS_DATABASE_URL_SYNC: postgresql+psycopg://postgres:postgres@postgresops-catalog:5432/postgresops
+  POSTGRESOPS_REDIS_URL: redis://redis:6379/0
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
