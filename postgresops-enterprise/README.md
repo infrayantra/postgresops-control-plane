@@ -31,6 +31,7 @@ Later phases extend: full monitoring pipeline, Celery workers, AI advisory servi
 
 - Full checklist: [`docs/DOCKER_HUB.md`](docs/DOCKER_HUB.md) (`docker pull`, `make hub-up`, manual `docker-build` / `docker-push`, and **how to update the Hub overview**).
 - **Public image:** `infrayantra/postgresops-control-plane` — overview copy lives in [`docker/DOCKERHUB_OVERVIEW.md`](docker/DOCKERHUB_OVERVIEW.md) (paste into Docker Hub’s repository description).
+- **Release history:** root [`CHANGELOG.md`](../CHANGELOG.md) (semantic versions and dates).
 
 ## Quick start — integrated backend (Docker, recommended)
 

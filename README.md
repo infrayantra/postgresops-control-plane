@@ -29,6 +29,8 @@ See [`postgresops-enterprise/README.md`](postgresops-enterprise/README.md) for f
 
 **Public image (Docker Hub):** `infrayantra/postgresops-control-plane` — `docker pull infrayantra/postgresops-control-plane:latest` and run steps in [`postgresops-enterprise/docs/DOCKER_HUB.md`](postgresops-enterprise/docs/DOCKER_HUB.md).
 
+**Release notes:** [`CHANGELOG.md`](CHANGELOG.md) (e.g. **v0.1.0** — 2026-05-14).
+
 ---
 
 *Earlier coursework materials (Flask demo app, screenshots, phase docs) were removed from this root to reduce clutter; restore from version control if you still need them.*
